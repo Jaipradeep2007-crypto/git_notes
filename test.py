@@ -146,25 +146,101 @@
 #     print(l % 4)
 
 
-marks = [70, 85, 60, 70,40,90]
-print ("marks" , marks)
-print ("total: ", sum(marks))
-print ("subject",len(marks))
-print ("highest mark", max(marks))
-print ("lowest mark", min(marks))
-print ("average mark", sum(marks)/len(marks))
+# marks = [70, 85, 60, 70,40,90]
+# print ("marks" , marks)
+# print ("total: ", sum(marks))
+# print ("subject",len(marks))
+# print ("highest mark", max(marks))
+# print ("lowest mark", min(marks))
+# print ("average mark", sum(marks)/len(marks))
+#
+#
+# marks = [20, 30, 40]
+#
+# average = sum(marks) / len(marks)
+#
+# print(average)
+#
+# i = 1
+# while i <= 10:
+#      print("pradeep")
+#      i = i + 1
 
 
-marks = [20, 30, 40]
-
-average = sum(marks) / len(marks)
-
-print(average)
-
-i = 1
-while i <= 10:
-    print("pradeep")
-    i = i + 1
 
 
+#
+# class BankAccount:
+#     def __init__(self, name, balance):
+#         self.name = name
+#         self.balance = balance
+#     def deposit(self, amount):
+#         self.balance += amount
+#         print("deposited successfully:",amount)
+#     def withdraw(self, amount):
+#         if amount <= self.balance:
+#             self.balance -= amount
+#             print("withdrawn successfully:",amount)
+#         else:
+#             print("Insufficient funds")
+#
+# obj = BankAccount("Kavi", 100000)
+# obj.deposit(50000)
+# obj.withdraw(10000)
+# print("Current balance:", obj.balance)
+#
+#
 
+
+
+class BankAccount:
+    def __init__(self, name, balance,pin):
+        self.name = name
+        self.__balance = balance
+        self.__pin = pin
+        self.history = []
+
+    def check_pin(self,pin):
+        return self.__pin == pin
+
+    def deposit(self,amount):
+        if amount >100000:
+            self.__balance += 10000
+            self.history.append(f"deposited: {amount}")
+            print("deposited successfully:",amount)
+        else:
+            print("Insufficient funds")
+
+    def withdraw(self,amount,pin):
+        if not self.check_pin(pin):
+            print("Incorrect pin")
+            return
+        if amount <= 100000:
+            self.__balance -= 10000
+            self.history.append(f"withdrawn: {amount}")
+            print("withdrawn successfully:",amount)
+        else:
+                print("Insufficient funds")
+
+    def check_balance(self,pin):
+        if self.check_pin(pin):
+            print("current balance:",self.__balance)
+        else:
+            print("incorrect pin")
+
+    def show_history(self,pin):
+        if self.check_pin(pin):
+            print("\ntransaction history.")
+            if not self.history:
+                print("no transactions yet.")
+            else:
+                for h in self.history:
+                    print("-",h)
+        else:
+            print("incorrect pin")
+obj = BankAccount("pradeep", 100000,2345)
+
+obj.deposit(100000)
+obj.withdraw(10000,2345)
+obj.check_balance(2345)
+obj.show_history(2345)
